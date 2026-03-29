@@ -32,4 +32,4 @@ COPY --from=build /app/target/[!slim]*.jar app.jar
 EXPOSE 8080
 
 # Use the -D flag to pass the port dynamically to the JVM
-ENTRYPOINT ["java", "-Xmx400m", "server.port=${PORT:8080}", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Xmx400m", "-jar", "app.jar"]
