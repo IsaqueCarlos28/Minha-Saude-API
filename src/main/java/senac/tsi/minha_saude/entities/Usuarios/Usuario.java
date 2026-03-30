@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 import java.util.Objects;
+
+import static jakarta.persistence.CascadeType.REMOVE;
 //import lombok.Getter;
 
 @Entity
@@ -55,7 +57,10 @@ public class Usuario {
     @NotNull(message = "Role é obrigatória")
     @Enumerated(EnumType.STRING)
     @Column(name = "role",nullable = false)
-    protected Role role;
+    private Role role;
+
+    @OneToOne(mappedBy = "usuario", cascade = REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Medico medico;
 
     //CONSTRUCTORS
     public Usuario(){}
@@ -74,6 +79,9 @@ public class Usuario {
     }
 
     //GETTERS & SETTERS
+    public Long getId() {
+        return id;
+    }
 
     public String getNome() {
         return nome;
@@ -131,9 +139,24 @@ public class Usuario {
         this.role = role;
     }
 
+    public Medico getMedico() {
+        return medico;
+    }
+    public void setMedico(Medico medico) {
+        if (this.medico != null) {
+            this.medico.setUsuario(null);
+        }
+
+        this.medico = medico;
+
+        if (medico != null) {
+            medico.setUsuario(this);
+        }
+    }
+
     //METODOS
 
-    protected String onlyDigitsFormat(String value){
+    private String onlyDigitsFormat(String value){
         return (value != null) ? value.replaceAll("\\D", ""):null;
     }
 
