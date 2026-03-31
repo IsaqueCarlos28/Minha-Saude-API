@@ -29,7 +29,7 @@ public class Medico {
     public Usuario getUsuario() {
         return usuario;
     }
-    protected void setUsuario(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
