@@ -1,4 +1,4 @@
-package senac.tsi.minha_saude.entities.Usuarios;
+package senac.tsi.minha_saude.dominios.usuarios;
 
 public enum Genero {
     MASCULINO(1),FEMININO(2),OUTRO(3);

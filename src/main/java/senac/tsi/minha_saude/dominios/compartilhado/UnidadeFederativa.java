@@ -1,4 +1,4 @@
-package senac.tsi.minha_saude.entities.Usuarios;
+package senac.tsi.minha_saude.dominios.compartilhado;
 
 public enum UnidadeFederativa {
     AC("Acre"), AL("Alagoas"), AP("Amapá"), AM("Amazonas"),

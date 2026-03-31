@@ -1,4 +1,4 @@
-package senac.tsi.minha_saude.entities.Usuarios;
+package senac.tsi.minha_saude.dominios.usuarios;
 
 public enum Role {
     PACIENTE(1),MEDICO(2);
