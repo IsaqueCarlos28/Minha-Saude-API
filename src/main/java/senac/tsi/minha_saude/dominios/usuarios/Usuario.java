@@ -1,14 +1,14 @@
-package senac.tsi.minha_saude.entities.Usuarios;
+package senac.tsi.minha_saude.dominios.usuarios;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.br.CPF;
+import senac.tsi.minha_saude.dominios.medicos.Medico;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
-import static jakarta.persistence.CascadeType.REMOVE;
+import static jakarta.persistence.CascadeType.ALL;
 //import lombok.Getter;
 
 @Entity
@@ -59,7 +59,7 @@ public class Usuario {
     @Column(name = "role",nullable = false)
     private Role role;
 
-    @OneToOne(mappedBy = "usuario", cascade = REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "usuario", cascade = ALL, orphanRemoval = true)
     private Medico medico;
 
     //CONSTRUCTORS

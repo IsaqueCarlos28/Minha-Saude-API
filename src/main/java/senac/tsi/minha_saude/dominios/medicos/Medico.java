@@ -1,8 +1,7 @@
-package senac.tsi.minha_saude.entities.Usuarios;
+package senac.tsi.minha_saude.dominios.medicos;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import senac.tsi.minha_saude.dominios.usuarios.Usuario;
 
 @Entity
 @Table(name = "medico")
@@ -16,41 +15,29 @@ public class Medico {
     @JoinColumn(name = "id_usuario",unique = true,nullable = false)
     private Usuario usuario;
 
-    @NotBlank(message = "O crm não deve estar em branco")
-    @Column(name = "crm",nullable = false,length = 6)
-    private String crm;
+    @Embedded
+    private CRM crm;
 
-    @NotNull(message = "Unidade Federativa é obrigatorio")
-    @Column(name = "uf",nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UnidadeFederativa uf;
+
 
     public Medico() {}
 
-    public Medico (Usuario usuario, String crm,UnidadeFederativa uf){
+    public Medico (Usuario usuario, CRM crm){
         setUsuario(usuario);
         setCrm(crm);
-        setUf(uf);
     }
     public Usuario getUsuario() {
         return usuario;
     }
-    public void setUsuario(Usuario usuario) {
+    protected void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public String getCrm() {
+    public CRM getCrm() {
         return crm;
     }
-    public void setCrm(String crm) {
-        this.crm = onlyDigitsFormat(crm);
-    }
-
-    public UnidadeFederativa getUf() {
-        return uf;
-    }
-    public void setUf(UnidadeFederativa uf) {
-        this.uf = uf;
+    public void setCrm(CRM crm) {
+        this.crm = crm;
     }
 
 
@@ -80,8 +67,7 @@ public class Medico {
                ID: %s
                Id Usuario: %s
                Crm: %s
-               Uf: %s
            }
-           """.formatted(id,(usuario != null ? usuario.getId() : null), crm, uf);
+           """.formatted(id,(usuario != null ? usuario.getId() : null), crm);
     }
 }
