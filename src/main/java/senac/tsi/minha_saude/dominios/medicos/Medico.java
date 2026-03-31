@@ -1,7 +1,11 @@
 package senac.tsi.minha_saude.dominios.medicos;
 
 import jakarta.persistence.*;
+import senac.tsi.minha_saude.dominios.especialidade.Especialidade;
 import senac.tsi.minha_saude.dominios.usuarios.Usuario;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "medico")
@@ -18,6 +22,9 @@ public class Medico {
     @Embedded
     private CRM crm;
 
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicoEspecialidade> especialidades = new ArrayList<>();
+
 
 
     public Medico() {}
@@ -26,6 +33,14 @@ public class Medico {
         setUsuario(usuario);
         setCrm(crm);
     }
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -40,8 +55,16 @@ public class Medico {
         this.crm = crm;
     }
 
+    public List<MedicoEspecialidade> getEspecialidades() {
+        return especialidades;
+    }
 
     //METODOS
+
+    public void addEspecialidade(Especialidade especialidade, String rqe) {
+        MedicoEspecialidade me = new MedicoEspecialidade(this, especialidade, rqe);
+        especialidades.add(me);
+    }
 
     private String onlyDigitsFormat(String value){
         return (value != null) ? value.replaceAll("\\D", ""):null;
