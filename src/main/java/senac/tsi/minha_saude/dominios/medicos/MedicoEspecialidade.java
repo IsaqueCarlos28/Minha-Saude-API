@@ -66,7 +66,7 @@ public class MedicoEspecialidade {
         if (this == o) return true;
         if (!(o instanceof MedicoEspecialidade)) return false;
         MedicoEspecialidade that = (MedicoEspecialidade) o;
-        return Objects.equals(composedId, that.composedId);
+        return composedId != null && Objects.equals(composedId, that.composedId);
     }
 
     @Override

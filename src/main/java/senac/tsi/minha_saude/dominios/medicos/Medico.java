@@ -62,6 +62,15 @@ public class Medico {
     //METODOS
 
     public void addEspecialidade(Especialidade especialidade, String rqe) {
+
+        boolean jaExiste = especialidades.stream().anyMatch(
+                me -> me.getEspecialidade().getId().equals(especialidade.getId())
+        );
+
+        if (jaExiste) {
+            throw new IllegalArgumentException("Este médico já possui essa especialidade");
+        }
+
         MedicoEspecialidade me = new MedicoEspecialidade(this, especialidade, rqe);
         especialidades.add(me);
     }

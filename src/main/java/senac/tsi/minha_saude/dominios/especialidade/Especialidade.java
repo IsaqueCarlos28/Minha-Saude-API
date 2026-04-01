@@ -24,6 +24,10 @@ public class Especialidade {
         setNome(nome);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
